@@ -20,7 +20,26 @@ public class ExampleController {
         public int id = 1;
         public String name;
 
+        public Entity() {
+        }
+
         public Entity(String name) {
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
             this.name = name;
         }
     }
@@ -43,6 +62,19 @@ public class ExampleController {
         logger.debug("Request got");
         return Response.status(201)
                 .entity(new Entity(name))
+                .build();
+    }
+
+    @POST
+    @Path("/addme")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response examplePost(
+            Entity entity
+    ) {
+
+        logger.info("Request got " + entity);
+        return Response.status(201)
+                .entity(new Entity(entity.name + " Hello "))
                 .build();
     }
 
